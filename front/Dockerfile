@@ -5,7 +5,7 @@ COPY . .
 RUN npm install --include=dev
 RUN npm run build
 
-EXPOSE 5173
+EXPOSE 9229
 
 # Command to run the NestJS application
 CMD ["npm", "run", "preview"]
