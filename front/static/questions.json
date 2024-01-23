@@ -1,0 +1,22 @@
+[
+    {
+        "text": "Quelle est la capital des USA",
+        "choices": [
+            "Washington",
+            "Paris",
+            "London",
+            "New York"
+        ],
+        "response": "Washington"
+    },
+    {
+        "text": "Quelle est la capital France ?",
+        "choices": [
+            "Washington",
+            "Paris",
+            "London",
+            "New York"
+        ],
+        "response": "Paris"
+    }
+]
