@@ -29,10 +29,6 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=password
-    volumes:
-     - ./DataBase/init.sql:/docker-entrypoint-initdb.d/init.sql
-     - ./DataBase/postgres-data:/var/lib/postgresql/data
-
     ports:
       - "5433:5432"
 
