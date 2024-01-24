@@ -14,7 +14,7 @@
 
 </div>
 
----
+
 
 <p align="center"> Few lines describing your project.
     <br> 
@@ -59,7 +59,7 @@ Creation sveltekit project
 1. Clone the repo 
 ````
 git clone https://github.com/TibTobbb/Quizz-app.git
-``
+````
 2. Install NPM packages 
 
 ````
@@ -70,13 +70,13 @@ npm install @nestjs/core
 
 3.Run Docker compose
 ```
-docker-Compose up --build
-
-or 
- docker compose build --no-cache
- docker image:run
+docker-Compose up 
 
 ```
+4
+````
+ go to the localhost:"port" page for access to the ap back or front 
+````
 
 
 ## 🔧 Running the tests <a name = "tests"></a>
@@ -105,7 +105,13 @@ Add notes about how to use the system.
 
 adresse dev
 ``````
+ back 
  http://localhost:3000
+ front 
+ http://localhost:8080
+ database
+ http://localhost:5433
+ 
 ````````
 
 ## ⛏️ Built Using <a name = "built_using"></a>
