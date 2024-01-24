@@ -2,10 +2,11 @@ version: '3.8'
 
 services:
   front:
+    platform: linux/x86_64
     restart: always
     build: ./front
     ports:
-      - "9229:9229"
+      - "8080:5173"
     environment:
       - NODE_ENV=development
     command: "npm run dev -- --host"
@@ -13,24 +14,27 @@ services:
       - ./front:/app
   back:
     build: ./backend
-    ports: 
-      - "9229:9229"
+    ports:
+      - "3000:3000"
     environment:
+      - PORT=3000
       - NODE_ENV=development
     command: "npm run start:dev"
     volumes:
-      - ./backend:/app
+      - ./backend/src:/app/src
 
   postgres_db:
     container_name: postgres_db
     image: postgres
     restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
     volumes:
-
      - ./DataBase/init.sql:/docker-entrypoint-initdb.d/init.sql
      - ./DataBase/postgres-data:/var/lib/postgresql/data
 
     ports:
       - "5433:5432"
+
 volumes:
   postgres-data:
