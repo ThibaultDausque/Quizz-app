@@ -14,7 +14,7 @@ services:
       - ./front:/app
   back:
     build: ./backend
-    ports: 
+    ports:
       - "8080:3000"
     environment:
       - PORT=3000
