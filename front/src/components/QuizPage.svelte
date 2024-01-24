@@ -1,28 +1,31 @@
 <script lang="ts">
-    import QuestionCard from "../components/QuestionCard.svelte";
-    import { fetchQuestions } from "../lib/utils";
-    
+    import { fetchQuestions } from '$lib/utils'; 
+    import QuestionCard from './QuestionCard.svelte';
     let questions: { text: string; choices: string[]; response: string }[] = [];
-    let indexQuestion = 0;
+    let indexQuestion: number = 0;
 
     fetchQuestions()
         .then((data) => {
             questions = data;
         })
-        .catch((error) => {
+        .catch((error: Error) => {
             console.error(
                 "Erreur lors de la récupération des questions:",
                 error,
             );
         });
 
-    function validAnswer(choice: string, isCorrect: boolean) {
+    function validAnswer(choice: string, isCorrect: boolean): void {
         console.log(`Utilisateur a choisi : ${choice}, Correct : ${isCorrect}`);
         if (isCorrect) {
-            alert("Bonne réponse !");
+            console.log("Bonne réponse !");
         } else {
-            alert("Mauvaise réponse.");
+            console.log("Mauvaise réponse.");
         }
+        nextQuestion();
+    }
+
+    function nextQuestion(): void {
         if (indexQuestion < questions.length - 1) {
             indexQuestion += 1;
         }
@@ -30,5 +33,5 @@
 </script>
 
 {#if questions.length > 0}
-    <QuestionCard question={questions[indexQuestion]} onSelect={validAnswer} />
+    <QuestionCard question={questions[indexQuestion]} onSelect={validAnswer} onTimeout={nextQuestion} />
 {/if}

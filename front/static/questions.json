@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "text": "Quelle est la capital des USA",
         "choices": [
             "Washington",
@@ -10,13 +11,25 @@
         "response": "Washington"
     },
     {
+        "id": 2,
         "text": "Quelle est la capital France ?",
+        "choices": [
+            "New York",
+            "Washington",
+            "London",
+            "Paris"
+        ],
+        "response": "Paris"
+    },
+    {
+        "id": 3,
+        "text": "Quelle est la capital Angleterre ?",
         "choices": [
             "Washington",
             "Paris",
             "London",
             "New York"
         ],
-        "response": "Paris"
+        "response": "London"
     }
 ]
