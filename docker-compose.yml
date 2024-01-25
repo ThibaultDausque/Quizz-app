@@ -7,8 +7,8 @@ services:
     build: ./front
     ports:
       - "8080:5173"
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - ./front.env
     command: "npm run dev -- --host"
     volumes:
       - ./front/src:/app/src
@@ -16,21 +16,34 @@ services:
     build: ./backend
     ports:
       - "3000:3000"
-    environment:
-      - PORT=3000
-      - NODE_ENV=development
+    env_file:
+      - ./back.env
     command: "npm run start:dev"
     volumes:
       - ./backend/src:/app/src
 
   postgres_db:
     container_name: postgres_db
-    image: postgres
+    image: postgres:latest
     restart: always
-    environment:
-      - POSTGRES_PASSWORD=password
+    env_file:
+      - ./postgres.env
+    volumes:
+      - ./DataBase/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./DataBase/postgres-data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
 
+  adminer:
+    container_name: adminer_quizz_app
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8180:8080"
+    env_file:
+      - ./adminer.env
+    depends_on:
+      - postgres_db
+
 volumes:
-  postgres-data:
+  postgres-data:     
