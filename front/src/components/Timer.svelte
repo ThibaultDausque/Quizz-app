@@ -1,31 +1,74 @@
-<script lang=ts>
-    import { onDestroy } from "svelte";
-    let elapsed = 0;
-    let duration = 10000;
+<script lang="ts">
+    import { onMount, onDestroy } from 'svelte';
+    import sabler from '$lib/img/sabler.svg';
+    export let initialTime = 10;
+    export let onTimeout: () => void;
 
-    let last_time = window.performance.now();
-    let frame: number;
+    let timer: NodeJS.Timeout;
+    let remainingTime = initialTime;
+    let key:number = 0;
 
-    (function update() {
-        frame = requestAnimationFrame(update);
+    $: remainingTime;
 
-        const time = window.performance.now();
-        elapsed += Math.min(time - last_time, duration - elapsed);
+    function startTimer() {
+        remainingTime = initialTime;
+        timer = setInterval(() => {
+            remainingTime -= 1;
+            if (remainingTime <= 0) {
+                clearInterval(timer);
+                onTimeout();
+            }
+        }, 1000);
+    }
 
-        last_time = time;
-    })();
+    onMount(startTimer);
 
     onDestroy(() => {
-        cancelAnimationFrame(frame);
+        clearInterval(timer);
     });
+
+    export function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+        key += 1;
+    }
 </script>
 
-<label>
-    elapsed time:
-    <progress value={elapsed / duration} />
-</label>
 
-<div>{(elapsed / 1000).toFixed(1)}s</div>
+<div class="sabler">
+    <img src={sabler} alt="sablier" key={key}/>
+    <div class ="time">{remainingTime}</div>
+</div>
 
-
-    
+<style>
+    .sabler {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15vh;
+        width: 100px;
+        height: auto;
+        padding: 20px;
+        box-shadow: 0ch 0ch 10ch 0ch rgba(0, 0, 0, 0.2);
+        border-radius: 40px;
+        background-color: #f3bc7e;
+    }
+    .time {
+        font-size: 50px;
+        margin-left: 20px;
+        color: #4a0857;
+        font-weight: bold;
+    }
+    img {
+        width: 40px;
+        animation: rotate 2s linear;
+    }
+    @keyframes rotate{
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+</style>

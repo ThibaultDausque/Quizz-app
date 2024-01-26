@@ -1,66 +1,48 @@
 <script lang="ts">
-    import { onMount, afterUpdate } from 'svelte';
+    import Timer from './Timer.svelte';
     export let question: { text: string; choices: string[]; response: string };
     export let onSelect: (choice: string, isCorrect: boolean) => void;
-    export let onTimeout: () => void;
     export let incorrectChoice: string;
+    let resetTimer: () => void;
 
     let visible = true;
     let key = 0;
-    let timer = startTimer();
 
-    function resetTimerAndAnimation() {
+    function resetAnimation() {
         visible = true;
         key += 1;
-        clearTimeout(timer);
-        startTimer();
     }
-
-    function startTimer() {
-        return setTimeout(() => {
-            visible = false;
-            onTimeout();
-        }, 10000);
-    }
-
-
-    onMount(() => {
-        return () => {
-            clearTimeout(timer);
-        };
-    });
-
-    afterUpdate(() => {
-        resetTimerAndAnimation();
-    });
-
+    
     function selectChoice(choice: string, isCorrect: boolean){
         incorrectChoice = isCorrect ? '' : choice;
         onSelect(choice, isCorrect);
-        resetTimerAndAnimation();
+        resetAnimation();
+        
     }
+
 </script>
 
 {#if visible}
     <div class="card">
         <p>{question.text}</p>
-        <ul>
-            {#each question.choices as choice (choice)}
-                <button
-                    type="button"
-                    class:incorrect={choice === incorrectChoice}
-                    on:click={() => selectChoice(choice, choice === question.response)}
-                >
-                    {choice}
-                </button>
-            {/each}
-        </ul>
+        {#each question.choices as choice (choice)}
+            <button
+                type="button"
+                class:incorrect={choice === incorrectChoice}
+                on:click={() => selectChoice(choice, choice === question.response)}
+            >
+                {choice}
+            </button>
+        {/each}
     </div>
 {/if}
 
 <style>
     .card {
         /*animation: fadeInOut 2s ease-in-out;*/
+        display: flex;
+        align-items: center;
+        flex-direction: column;
         margin-top: 15vh;
         width: 800px;
         height: auto;
@@ -88,15 +70,15 @@
         }
     }
 
-    p {
+    p { 
+        text-align: center;
         font-size: 30px;
         font-weight: bold;
-        text-align: center;
         color: #4a0857;
     }
 
     button {
-        width: 100%;
+        width: 300px;
         height: 50px;
         margin: 10px;
         border: none;
@@ -107,4 +89,5 @@
         font-weight: bold;
         cursor: pointer;
     }
+
 </style>
