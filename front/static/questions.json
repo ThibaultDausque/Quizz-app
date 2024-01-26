@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "text": "Quelle est la capital des USA",
+        "text": "Quelle est la capital des USA ?",
         "choices": [
             "Washington",
             "Paris",
