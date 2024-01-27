@@ -3,10 +3,10 @@
     import sabler from '$lib/img/sabler.svg';
     export let initialTime = 10;
     export let onTimeout: () => void;
-
+   
     let timer: NodeJS.Timeout;
     let remainingTime = initialTime;
-    let key:number = 0;
+    let key: number = 0;
 
     $: remainingTime;
 
@@ -36,17 +36,19 @@
 
 
 <div class="sabler">
-    <img src={sabler} alt="sablier" key={key}/>
-    <div class ="time">{remainingTime}</div>
+    {#key key}
+    <img src={sabler} alt="sablier" />
+    <div class="time">{remainingTime}</div>
+{/key}
 </div>
-
 <style>
     .sabler {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 15vh;
-        width: 100px;
+        max-width: 150px;
+        min-width: 150px;
         height: auto;
         padding: 20px;
         box-shadow: 0ch 0ch 10ch 0ch rgba(0, 0, 0, 0.2);
@@ -54,16 +56,16 @@
         background-color: #f3bc7e;
     }
     .time {
-        font-size: 50px;
+        font-size: 30px;
         margin-left: 20px;
         color: #4a0857;
         font-weight: bold;
     }
     img {
         width: 40px;
-        animation: rotate 2s linear;
+        animation: rotate 0.3s linear;
     }
-    @keyframes rotate{
+    @keyframes rotate {
         0% {
             transform: rotate(0deg);
         }

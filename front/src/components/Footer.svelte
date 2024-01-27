@@ -1,5 +1,5 @@
 <div class="footer">
-    <p>© 2024 - QUIZZ APP by nonobaststef</p>
+    <p>© 2024 - QUIZZ APP by NoNoBastStef</p>
 </div>
 
 <style>

@@ -1,9 +1,7 @@
 <script lang="ts">
-    import Timer from './Timer.svelte';
     export let question: { text: string; choices: string[]; response: string };
     export let onSelect: (choice: string, isCorrect: boolean) => void;
     export let incorrectChoice: string;
-    let resetTimer: () => void;
 
     let visible = true;
     let key = 0;
@@ -17,7 +15,6 @@
         incorrectChoice = isCorrect ? '' : choice;
         onSelect(choice, isCorrect);
         resetAnimation();
-        
     }
 
 </script>
