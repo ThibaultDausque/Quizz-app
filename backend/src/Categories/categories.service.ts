@@ -3,7 +3,7 @@ import { Categories } from './categories.entity';
 import { Repository } from 'typeorm';
 import { CreateCategoriesDto } from './dto/createCategories.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QuestionsService } from 'src/questions/questions.service';
+import { QuestionsService } from '../Question/questions.service';
 import { UUID } from 'crypto';
 
 @Injectable()
