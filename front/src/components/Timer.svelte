@@ -46,7 +46,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5vh;
     max-width: 150px;
     min-width: 150px;
     height: auto;
