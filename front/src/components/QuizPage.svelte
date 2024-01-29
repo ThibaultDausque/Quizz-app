@@ -1,7 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { fetchQuestions } from '../lib/utils'; 
+    import { onMount } from 'svelte';
     import { fetchQuestions } from '$lib/utils'; 
     import QuestionCard from './QuestionCard.svelte';
+
     let questions: { text: string; choices: string[]; response: string }[] = [];
     let indexQuestion: number = 0;
     let incorrectChoice: string = "";
