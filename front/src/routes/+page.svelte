@@ -1,9 +1,7 @@
 <script lang="ts">
-    import QuizPage from "../components/QuizPage.svelte";
-    import Header from "../components/Header.svelte";   
- 
+    import LogicQuiz from "../components/LogicQuiz.svelte";
 </script>
 
-   <QuizPage />
+   <LogicQuiz />
 
 
