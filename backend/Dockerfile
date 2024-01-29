@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY . .
 RUN npm install --include=dev
+RUN npm install --save @nestjs/typeorm typeorm pg
 RUN npm run build
 
 EXPOSE 3000
