@@ -4,7 +4,6 @@ export async function fetchQuestions() {
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des questions');
         }
-
         const data = await response.json();
         return data;
     } catch (error) {
