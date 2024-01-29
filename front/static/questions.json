@@ -1,35 +1,57 @@
 [
     {
         "id": 1,
-        "text": "Quelle est la capital des USA ?",
+        "text": "Quelle est la capitale de l'Espagne ?",
         "choices": [
-            "Washington",
-            "Paris",
-            "London",
-            "New York"
+            "Valence",
+            "Barcelone",
+            "Séville",
+            "Madrid"
         ],
-        "response": "Washington"
+        "response": "Madrid"
     },
     {
         "id": 2,
-        "text": "Quelle est la capital France ?",
+        "text": "Quelle est la capitale du Brésil ?",
         "choices": [
-            "New York",
-            "Washington",
-            "London",
-            "Paris"
+            "Brasilia",
+            "Rio de Janeiro",
+            "São Paulo",
+            "Salvador"
         ],
-        "response": "Paris"
+        "response": "Brasilia"
     },
     {
         "id": 3,
-        "text": "Quelle est la capital Angleterre ?",
+        "text": "Quelle est la capitale de l'Argentine ?",
         "choices": [
-            "Washington",
-            "Paris",
-            "London",
-            "New York"
+            "Córdoba",
+            "Rosario",
+            "Mendoza",
+            "Buenos Aires"
         ],
-        "response": "London"
+        "response": "Buenos Aires"
+    },
+    {
+        "id": 4,
+        "text": "Quelle est la capitale de la Roumanie ?",
+        "choices": [
+            "Timișoara",
+            "Iași",
+            "Cluj-Napoca",
+            "Bucarest"
+        ],
+        "response": "Bucarest"
+    },
+    {
+        "id": 5,
+        "text": "Quelle est la capitale de la Hongrie ?",
+        "choices": [
+            "Debrecen",
+            "Szeged",
+            "Budapest",
+            "Pécs"
+        ],
+        "response": "Budapest"
     }
 ]
