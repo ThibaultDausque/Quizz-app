@@ -27,7 +27,7 @@
 
   p {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     color: #4a0857;
   }

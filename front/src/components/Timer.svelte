@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import sabler from "$lib/img/sabler.svg";
-  export let initialTime = 10;
+  export let initialTime = 5;
   export let onTimeout: () => void;
 
   let timer: NodeJS.Timeout;

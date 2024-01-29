@@ -1,4 +1,3 @@
-<!-- QuizzPage.svelte -->
 <script lang="ts">
   import { onMount } from "svelte";
   import { fetchQuestions } from "../lib/utils";
@@ -48,11 +47,13 @@
 
       <Score />
     </div>
-    <Question
-      question={questions[indexQuestion]}
-      onSelect={validAnswer}
-      isIncorrect={incorrectChoice}
-    />
+    <div class="question">
+      <Question
+        question={questions[indexQuestion]}
+        onSelect={validAnswer}
+        isIncorrect={incorrectChoice}
+      />
+    </div>
   </Card>
 {/if}
 
@@ -61,5 +62,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .question {
+    width: 80%;
   }
 </style>

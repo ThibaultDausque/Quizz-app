@@ -8,11 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 200px;
     width: 100%;
     background-color: #f3e5f5;
     font-weight: bold;
     color: #4a0857;
-    font-size: 30px;
+    font-size: 20px;
   }
 </style>
