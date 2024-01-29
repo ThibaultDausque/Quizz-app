@@ -11,7 +11,7 @@
 
 <style>
   .card {
-    /*animation: fadeInOut 2s ease-in-out;*/
+    animation: fadeInOut 2s ease-in-out;
     display: flex;
     align-items: center;
     flex-direction: column;
