@@ -1,10 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { fetchQuestions } from '../lib/utils'; 
-    import { onMount } from 'svelte';
-    import { fetchQuestions } from '$lib/utils'; 
-    import QuestionCard from './QuestionCard.svelte';
-
+    import Question from './Question.svelte';
     let questions: { text: string; choices: string[]; response: string }[] = [];
     let indexQuestion: number = 0;
     let incorrectChoice: string = "";
@@ -24,9 +21,7 @@
         console.log(`Utilisateur a choisi : ${choice}, Correct : ${isCorrect}`);
         if (isCorrect) {
             nextQuestion();
-            console.log("Bonne réponse !");
         } else {
-            console.log("Mauvaise réponse.");
             incorrectChoice = choice;
         }
     }
@@ -40,5 +35,5 @@
 </script>
 
 {#if questions.length > 0}
-    <QuestionCard question={questions[indexQuestion]} onSelect={validAnswer} onTimeout={nextQuestion} incorrectChoice={incorrectChoice} />
+    <Question question={questions[indexQuestion]} onSelect={validAnswer} onTimeout={nextQuestion} incorrectChoice={incorrectChoice} />
 {/if}

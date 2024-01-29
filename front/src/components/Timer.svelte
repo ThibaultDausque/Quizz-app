@@ -1,31 +1,77 @@
-<script lang=ts>
-    import { onDestroy } from "svelte";
-    let elapsed = 0;
-    let duration = 10000;
+<script lang="ts">
+  import { onMount, onDestroy } from "svelte";
+  import sabler from "$lib/img/sabler.svg";
+  export let initialTime = 5;
+  export let onTimeout: () => void;
 
-    let last_time = window.performance.now();
-    let frame: number;
+  let timer: NodeJS.Timeout;
+  let remainingTime = initialTime;
+  let key: number = 0;
 
-    (function update() {
-        frame = requestAnimationFrame(update);
+  $: remainingTime;
 
-        const time = window.performance.now();
-        elapsed += Math.min(time - last_time, duration - elapsed);
+  function startTimer() {
+    remainingTime = initialTime;
+    timer = setInterval(() => {
+      remainingTime -= 1;
+      if (remainingTime <= 0) {
+        clearInterval(timer);
+        onTimeout();
+      }
+    }, 1000);
+  }
 
-        last_time = time;
-    })();
+  onMount(startTimer);
 
-    onDestroy(() => {
-        cancelAnimationFrame(frame);
-    });
+  onDestroy(() => {
+    clearInterval(timer);
+  });
+
+  export function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+    key += 1;
+  }
 </script>
 
-<label>
-    elapsed time:
-    <progress value={elapsed / duration} />
-</label>
+<div class="sabler">
+  {#key key}
+    <img src={sabler} alt="sablier" />
+    <div class="time">{remainingTime}</div>
+  {/key}
+</div>
 
-<div>{(elapsed / 1000).toFixed(1)}s</div>
+<style>
+  .sabler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+    max-width: 150px;
+    min-width: 150px;
+    height: auto;
+    padding: 20px;
+    border-radius: 40px;
+  }
 
+  .time {
+    font-size: 30px;
+    margin-left: 20px;
+    color: #4a0857;
+    font-weight: bold;
+  }
 
-    
+  img {
+    width: 40px;
+    animation: rotate 0.3s linear;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+</style>

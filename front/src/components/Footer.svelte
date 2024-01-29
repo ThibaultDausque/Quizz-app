@@ -1,15 +1,18 @@
 <div class="footer">
-    <p>© 2024 - QUIZZ APP</p>
+  <p>© 2024 - QUIZZ APP in SIMPLON by NoNoBastStéf</p>
 </div>
 
 <style>
-    .footer {
-        margin-top: 10vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        width: 100%;
-        background-color: #f3e5f5;
-    }
+  .footer {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    background-color: #f3e5f5;
+    font-weight: bold;
+    color: #4a0857;
+    font-size: 20px;
+  }
 </style>
