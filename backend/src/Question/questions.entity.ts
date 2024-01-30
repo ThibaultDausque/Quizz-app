@@ -1,6 +1,7 @@
+
 import { UUID } from 'crypto';
 import {Entity , Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import { Categories } from '../categories/categories.entity';
+import { Categories } from '../Categories/categories.entity';
 // 1. Import the @Entity() decorator and the @Column() decorator from the TypeORM package:
 @Entity()
 // 2. Create a Question class and add the @PrimaryGeneratedColumn() decorator to the id property:
