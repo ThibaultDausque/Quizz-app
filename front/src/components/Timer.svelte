@@ -6,7 +6,7 @@
 
   let timer: NodeJS.Timeout;
   let remainingTime = initialTime;
-  let key: number = 0;
+  let restart: number = 0;
 
   $: remainingTime;
 
@@ -30,12 +30,12 @@
   export function resetTimer() {
     clearInterval(timer);
     startTimer();
-    key += 1;
+    restart += 1;
   }
 </script>
 
 <div class="sabler">
-  {#key key}
+  {#key restart}
     <img src={sabler} alt="sablier" />
     <div class="time">{remainingTime}</div>
   {/key}
@@ -46,7 +46,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5vh;
     max-width: 150px;
     min-width: 150px;
     height: auto;
