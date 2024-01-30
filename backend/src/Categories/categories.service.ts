@@ -17,7 +17,7 @@ export class CategoriesService {
 
 	async create(categories: CreateCategoriesDto) {
 		const categoriesCreated = this.categoriesRepository.create()
-		categoriesCreated.name = categories.title;
+		categoriesCreated.name = categories.name;
 		categoriesCreated.description = categories.description;
 		await this.categoriesRepository.insert(categoriesCreated)
 		categoriesCreated.questions = await this.questionService.createMany(categories.questions);
