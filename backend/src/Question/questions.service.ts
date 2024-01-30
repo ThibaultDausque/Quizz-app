@@ -19,6 +19,8 @@ export class QuestionsService {
             const questionCreated = this.questionsRepository.create();
             // 5. Set the questionCreated.question property to the question.question value:
             questionCreated.question = question.question;
+            // 5. Set the questionCreated.answers property to the question.answers value:
+            questionCreated.correctAnswer = question.correctAnswer;
 
             return questionCreated;
         });
