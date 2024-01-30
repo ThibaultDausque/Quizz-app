@@ -8,8 +8,8 @@
   import { score, totalQuestions } from "./Store.js";
   import AddPoint from "./AddPoint.svelte";
 
-  let quiz: { question: string; choices: string[]; correctAnswer: string }[] =
-    [];
+
+  let quiz: { question: string; choices: string[]; correctAnswer: string }[] = [];
   let indexQuestion: number = 0;
   let incorrectChoice: string = "";
   let resetTimer: () => void;
@@ -34,6 +34,7 @@
       await new Promise((resolve) => setTimeout(resolve, 600));
       nextQuestion();
       incorrectChoice = "";
+    
     } else {
       score.update((currentScore) =>
         currentScore > 0 ? currentScore - 1 : currentScore,
@@ -51,7 +52,9 @@
     answerIsCorrect = false;
     displayAddPoint = false;
   }
+
 </script>
+
 
 {#if quiz.length > 0 && indexQuestion < quiz.length}
   <Card
@@ -81,6 +84,7 @@
 {/if}
 
 <style>
+  
   .result {
     display: flex;
     justify-content: center;
@@ -115,4 +119,6 @@
     color: #4a0857;
     font-weight: bold;
   }
+
 </style>
+
