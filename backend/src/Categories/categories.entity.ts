@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Question } from 'src/questions/questions.entity';
+import { Question } from 'src/Question/questions.entity';
 import { UUID } from 'crypto';
 
 @Entity()

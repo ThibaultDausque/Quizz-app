@@ -4,7 +4,7 @@ import { Question } from './questions.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 //create a QuestionsModule class and import the TypeOrmModule.forFeature() method.
-@Module({
+@Module({ 
        // 1. Import the TypeOrmModule.forFeature() method and pass in the Question entity:
         imports: [TypeOrmModule.forFeature([Question])],
        // 2. Provide the QuestionsService class:

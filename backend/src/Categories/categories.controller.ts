@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post, Param } from '@nestjs/common';
-import { CreateCategoriestDto } from './dto/createCategories.dto';
+import { CreateCategoriesDto } from './dto/createCategories.dto';
 import { CategoriesService } from './categories.service';
+import type { UUID } from 'crypto';
+
 
 @Controller('categories')
 export class CategoriesController {
@@ -13,8 +15,8 @@ export class CategoriesController {
 	}
 
 	@Get(':id')
-	async findOne(@Param() params: { id: string }) {
-		return this.categoriesService.findOneById(parseInt(params.id))
+	async findOne(@Param() params: { id: UUID}) {
+		return this.categoriesService.findOneById(params.id)
 	}
 
 	@Post()
