@@ -3,7 +3,7 @@ import { Categories } from './categories.entity';
 import { Repository } from 'typeorm';
 import { CreateCategoriesDto } from './dto/createCategories.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QuestionsService } from 'src/questions/questions.service';
+import { QuestionsService } from '../Question/questions.service';
 import { UUID } from 'crypto';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class CategoriesService {
 
 	async create(categories: CreateCategoriesDto) {
 		const categoriesCreated = this.categoriesRepository.create()
-		categoriesCreated.name = categories.title;
+		categoriesCreated.name = categories.name;
 		categoriesCreated.description = categories.description;
 		await this.categoriesRepository.insert(categoriesCreated)
 		categoriesCreated.questions = await this.questionService.createMany(categories.questions);

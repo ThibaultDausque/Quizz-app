@@ -1,7 +1,7 @@
-import { CreateQuestiontDto } from "src/questions/dto/createQuestion.dto";
+import { CreateQuestionDto } from '../../Question/dto/createQuestion.dto';
 
 export class CreateCategoriesDto {
-	title: string;
+	name: string;
 	description: string;
-	questions: CreateQuestiontDto[];
+	questions: CreateQuestionDto[];
 }

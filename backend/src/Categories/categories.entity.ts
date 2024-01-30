@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Question } from 'src/questions/questions.entity';
+import { Question } from 'src/Question/questions.entity';
 import { UUID } from 'crypto';
 
 @Entity()
 export class Categories {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn('uuid')
 	id: UUID;
 
 	@Column({ length: 500 })
@@ -13,7 +13,7 @@ export class Categories {
 	@Column('text')
 	description: string;
 
-	@OneToMany(() => Question, (question) => question.categories)
+	@OneToMany(() => Question, (questions) => questions.categories)
 	questions: Question[]
 
 }

@@ -1,57 +1,57 @@
 [
     {
         "id": 1,
-        "text": "Quelle est la capitale de l'Espagne ?",
+        "question": "Quelle est la capitale de l'Espagne ?",
         "choices": [
             "Valence",
             "Barcelone",
             "Séville",
             "Madrid"
         ],
-        "response": "Madrid"
+        "correctAnswer": "Madrid"
     },
     {
         "id": 2,
-        "text": "Quelle est la capitale du Brésil ?",
+        "question": "Quelle est la capitale du Brésil ?",
         "choices": [
             "Brasilia",
             "Rio de Janeiro",
             "São Paulo",
             "Salvador"
         ],
-        "response": "Brasilia"
+        "correctAnswer": "Brasilia"
     },
     {
         "id": 3,
-        "text": "Quelle est la capitale de l'Argentine ?",
+        "question": "Quelle est la capitale de l'Argentine ?",
         "choices": [
             "Córdoba",
             "Rosario",
             "Mendoza",
             "Buenos Aires"
         ],
-        "response": "Buenos Aires"
+        "correctAnswer": "Buenos Aires"
     },
     {
         "id": 4,
-        "text": "Quelle est la capitale de la Roumanie ?",
+        "question": "Quelle est la capitale de la Roumanie ?",
         "choices": [
             "Timișoara",
             "Iași",
             "Cluj-Napoca",
             "Bucarest"
         ],
-        "response": "Bucarest"
+        "correctAnswer": "Bucarest"
     },
     {
         "id": 5,
-        "text": "Quelle est la capitale de la Hongrie ?",
+        "question": "Quelle est la capitale de la Hongrie ?",
         "choices": [
             "Debrecen",
             "Szeged",
             "Budapest",
             "Pécs"
         ],
-        "response": "Budapest"
+        "correctAnswer": "Budapest"
     }
 ]

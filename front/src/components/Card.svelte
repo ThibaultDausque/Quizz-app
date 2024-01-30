@@ -1,11 +1,11 @@
 <script lang="ts">
-  export let question: { text: string; choices: string[]; response: string };
-  export let currentQuestionInfo: string;
+  export let quiz: { question: string; choices: string[]; correctAnswer: string };
+  export let questionNum: string;
 </script>
 
 <div class="card">
-  <p>{currentQuestionInfo}</p>
-  <p>{question.text}</p>
+  <p>{questionNum}</p>
+  <p>{quiz.question}</p>
   <slot />
 </div>
 

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Choice from "./Choice.svelte";
-  export let question: { text: string; choices: string[]; response: string };
+  import Choice from "./ButtonChoice.svelte";
+  export let quiz: { choices: string[]; correctAnswer: string };
   export let onSelect: (choice: string, isCorrect: boolean) => void;
   export let isIncorrect: string;
 </script>
 
-{#each question.choices as choice}
+{#each quiz.choices as choice}
   
   <Choice
     {choice}
     {onSelect}
-    isCorrect={choice === question.response}
+    isCorrect={choice === quiz.correctAnswer}
     {isIncorrect}
   />
 {/each}
