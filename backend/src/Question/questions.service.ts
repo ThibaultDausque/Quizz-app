@@ -28,4 +28,10 @@ export class QuestionsService {
         await this.questionsRepository.insert(questionsCreated);
         return questionsCreated;
     }
+    async createone (question: CreateQuestionDto) {
+        const questionCreated = this.questionsRepository.create();
+        questionCreated.question = question.question;
+        questionCreated.correctAnswer = question.correctAnswer;
+        return this.questionsRepository.save(questionCreated);
+    }
 }
