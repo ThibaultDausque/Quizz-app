@@ -6,45 +6,60 @@
   import Score from "./Score.svelte";
   import Card from "./Card.svelte";
   import { score, totalQuestions } from "./Store.js";
+  import AddPoint from "./AddPoint.svelte";
 
-  let questions: { text: string; choices: string[]; response: string }[] = [];
+
+  let quiz: { question: string; choices: string[]; correctAnswer: string }[] = [];
   let indexQuestion: number = 0;
   let incorrectChoice: string = "";
   let resetTimer: () => void;
+  let answerIsCorrect: boolean = false;
+  let displayAddPoint: boolean = false;
+  let isProcessing: boolean = false;
 
+  
   onMount(async () => {
-    questions = await fetchQuestions();
-    totalQuestions.set(questions.length);
+    quiz = await fetchQuestions();
+    totalQuestions.set(quiz.length);
   });
 
-  function validAnswer(choice: string, isCorrect: boolean) {
+
+  async function validAnswer(choice: string, isCorrect: boolean) {
+    if (isProcessing) return; // Ignore les clics supplémentaires pendant le traitement
+    isProcessing = true; // Indiquer que le traitement est en cours
+
     if (isCorrect) {
       score.update((currentScore) => currentScore + 1);
+      answerIsCorrect = true;
+      await new Promise((resolve) => setTimeout(resolve, 600));
       nextQuestion();
       incorrectChoice = "";
     
     } else {
+      score.update((currentScore) =>
+        currentScore > 0 ? currentScore - 1 : currentScore,
+      );
       incorrectChoice = choice;
+      answerIsCorrect = false;
     }
-  }
-
-  $: isCompleted = () => {
-    return indexQuestion <= questions.length
+    isProcessing = false;
   }
 
   function nextQuestion() {
-      incorrectChoice = "";
-      indexQuestion += 1;
-      resetTimer();
+    incorrectChoice = "";
+    indexQuestion += 1;
+    resetTimer();
+    answerIsCorrect = false;
+    displayAddPoint = false;
   }
 
 </script>
 
-{#if questions.length > 0} 
-  {#if indexQuestion < questions.length}
+
+{#if quiz.length > 0 && indexQuestion < quiz.length}
   <Card
-    question={questions[indexQuestion]}
-    currentQuestionInfo={`Question ${indexQuestion + 1} / ${questions.length}`}
+    quiz={quiz[indexQuestion]}
+    questionNum={`Question ${indexQuestion + 1} / ${quiz.length}`}
   >
     <div class="status">
       <Timer onTimeout={nextQuestion} bind:resetTimer />
@@ -52,21 +67,20 @@
     </div>
     <div class="question">
       <Question
-        question={questions[indexQuestion]}
+        quiz={quiz[indexQuestion]}
         onSelect={validAnswer}
         isIncorrect={incorrectChoice}
       />
+      {#if answerIsCorrect}
+        <AddPoint />
+      {/if}
     </div>
   </Card>
-  {:else if answeredLastQuestion} 
-    
-      <div class="result">
-        <h2>Quiz terminé !</h2>
-        <h3>Votre score est de : </h3>
-        <p class="displayScore"> <Score />/{questions.length}</p>
-      </div>
-    
-  {/if}
+{:else}
+  <div class="result">
+    <h2>Quiz terminé !</h2>
+    <p class="displayScore"><Score />/{quiz.length}</p>
+  </div>
 {/if}
 
 <style>

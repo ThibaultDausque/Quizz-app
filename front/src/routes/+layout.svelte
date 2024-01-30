@@ -1,8 +1,8 @@
 <script lang="ts">
     import Footer from "../components/Footer.svelte";
     import Header from "../components/Header.svelte";
-
 </script>
+
 <header>
     <Header />
 </header>
@@ -13,9 +13,9 @@
 <footer>
     <Footer />
 </footer>
+
 <style>
-    
-    header{
+    header {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,5 +26,4 @@
         justify-content: center;
         align-items: center;
     }
-   
 </style>

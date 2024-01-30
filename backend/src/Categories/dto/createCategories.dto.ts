@@ -1,7 +1,7 @@
 import { CreateQuestionDto } from '../../Question/dto/createQuestion.dto';
 
 export class CreateCategoriesDto {
-	title: string;
+	name: string;
 	description: string;
 	questions: CreateQuestionDto[];
 }

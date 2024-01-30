@@ -2,9 +2,10 @@
   export let text: string;
   export let isIncorrect: boolean = false;
   export let onClick: (event: MouseEvent) => void;
+  export let isProcessing: boolean = false;
 </script>
 
-<button type="button" class:incorrect={isIncorrect} on:click={onClick}>
+<button type="button" class:incorrect={isIncorrect} disabled={isProcessing} on:click={onClick}>
   {text}
 </button>
 

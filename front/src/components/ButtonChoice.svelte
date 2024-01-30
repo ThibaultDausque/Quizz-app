@@ -1,6 +1,5 @@
 <script lang="ts">
   import Button from "./Button.svelte";
-
   export let choice: string;
   export let onSelect: (choice: string, isCorrect: boolean) => void;
   export let isCorrect: boolean;

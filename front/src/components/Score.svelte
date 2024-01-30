@@ -4,7 +4,6 @@
   import Score from "../lib/img/score.svg";
   let currentScore = 0;
   
-
   onMount(() => {
     // listen change in store with methode subscribe
     const unsubscribeScore = score.subscribe((value) => {
