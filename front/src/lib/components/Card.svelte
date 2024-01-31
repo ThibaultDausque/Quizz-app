@@ -17,7 +17,7 @@
     flex-direction: column;
     margin-top: 15vh;
     width: 800px;
-    height: auto;
+    height: 450px;
     padding: 20px;
     box-shadow: 0ch 0ch 10ch 0ch rgba(0, 0, 0, 0.2);
     border-radius: 40px;
