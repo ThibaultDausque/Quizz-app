@@ -9,7 +9,7 @@ import { CreateQuestionDto } from 'src/Question/dto/createQuestion.dto';
 
 @Injectable()
 export class CategoriesService {
-	update(category: Categories) {		 
+	update(category: Categories) {
 		return this.categoriesRepository.save(category);
 	}
 
@@ -33,8 +33,13 @@ export class CategoriesService {
 	findAll() {
 		return this.categoriesRepository.find();
 	}
-	findOneByName(name: string) {
-		return this.categoriesRepository.findOne({ where: { name: name } })
+	//find a category by his name
+	async findOneByName(name: string) {
+		return this.categoriesRepository.findOne({
+			where: { name: name }, relations: {
+				questions: true
+			}
+		})
 	}
 
 	findOneById(id: UUID) {
