@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { fetchQuestions } from "../lib/utils";
+  import { load } from "../utils";
   import Timer from "./Timer.svelte";
   import Question from "./Question.svelte";
   import Score from "./Score.svelte";
   import Card from "./Card.svelte";
   import { score, totalQuestions } from "./Store.js";
   import AddPoint from "./AddPoint.svelte";
-
 
   let quiz: { question: string; choices: string[]; correctAnswer: string }[] = [];
   let indexQuestion: number = 0;
@@ -17,15 +16,13 @@
   let displayAddPoint: boolean = false;
   let isProcessing: boolean = false;
 
-  
   onMount(async () => {
-    quiz = await fetchQuestions();
+    quiz = await load();
     totalQuestions.set(quiz.length);
   });
 
-
   async function validAnswer(choice: string, isCorrect: boolean) {
-    if (isProcessing) return; // Ignore les clics supplémentaires pendant le traitement
+    if (isProcessing && (answerIsCorrect = true)) return; // Ignore les clics supplémentaires pendant le traitement
     isProcessing = true; // Indiquer que le traitement est en cours
 
     if (isCorrect) {
@@ -55,7 +52,6 @@
 
 </script>
 
-
 {#if quiz.length > 0 && indexQuestion < quiz.length}
   <Card
     quiz={quiz[indexQuestion]}
@@ -72,7 +68,9 @@
         isIncorrect={incorrectChoice}
       />
       {#if answerIsCorrect}
-        <AddPoint />
+        <AddPoint value="+1" bgColor={{style: "background-color: green;"}}/>
+      {:else if incorrectChoice}
+        <AddPoint value="-1" bgColor={{style: "background-color: red;"}}/>
       {/if}
     </div>
   </Card>

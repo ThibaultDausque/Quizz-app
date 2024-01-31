@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { score} from "./Store.js";
-  import Score from "../lib/img/score.svg";
+  import Score from "$lib/img/score.svg";
   let currentScore = 0;
   
   onMount(() => {
@@ -14,6 +14,7 @@
       unsubscribeScore();
     };
   });
+  
 </script>
 
 <div class="score">

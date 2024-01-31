@@ -20,7 +20,7 @@
   .title {
     display: flex;
     align-items: center;
-    color: #4a0857;
+    color: #ca3ae7;
     text-align: center;
     font-size: 75px;
   }
