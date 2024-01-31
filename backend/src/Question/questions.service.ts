@@ -33,5 +33,5 @@ export class QuestionsService {
         questionCreated.question = question.question;
         questionCreated.correctAnswer = question.correctAnswer;
         return this.questionsRepository.save(questionCreated);
-    }
+    }   
 }
