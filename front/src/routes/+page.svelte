@@ -1,25 +1,26 @@
 <script lang="ts">
-    import Card from "../components/Card.svelte";
-</script>
-
-<div class="card">
-<a href="/capitals">capital quiz
-</a>
-</div>
-<style>
-    .card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 40px;
-        width: 300px;
-        height: 300px;
-        background-color: #f5f5f5;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-        margin-top: 15vh;
-    }
-    a {
-        text-decoration: none;
-        color: black;
-    }
-</style>
+    import { onMount } from 'svelte';
+    import { load } from '../lib/utils';
+  
+    let categories: string | any[] = [];
+  
+    onMount(async () => {
+      categories = await load();
+    });
+  </script>
+  
+  {#if categories.length === 0}
+    <p>Chargement retest</p>
+  {:else}
+    <h1>Categories</h1>
+  
+    <ul>
+      {#each categories as category (category.id)}
+        <li>
+        
+          <p>Nom: {category.name}</p>
+          <p>Description: {category.description}</p>
+        </li>
+      {/each}
+    </ul>
+  {/if}
