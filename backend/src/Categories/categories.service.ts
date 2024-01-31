@@ -5,9 +5,13 @@ import { CreateCategoriesDto } from './dto/createCategories.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QuestionsService } from '../Question/questions.service';
 import { UUID } from 'crypto';
+import { CreateQuestionDto } from 'src/Question/dto/createQuestion.dto';
 
 @Injectable()
 export class CategoriesService {
+	update(category: Categories) {		 
+		return this.categoriesRepository.save(category);
+	}
 
 	constructor(
 		@InjectRepository(Categories)
@@ -28,6 +32,9 @@ export class CategoriesService {
 
 	findAll() {
 		return this.categoriesRepository.find();
+	}
+	findOneByName(name: string) {
+		return this.categoriesRepository.findOne({ where: { name: name } })
 	}
 
 	findOneById(id: UUID) {
