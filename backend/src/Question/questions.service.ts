@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {Repository } from 'typeorm';
 import { Question } from './questions.entity';
 import { CreateQuestionDto } from './dto/createQuestion.dto';
 
@@ -24,9 +24,22 @@ export class QuestionsService {
 
             return questionCreated;
         });
+        //check if questions  exist in the database
+       
+        const checkquestions = await this.questionsRepository.find({
+            where: questionsCreated.map((question) => ({
+                question: question.question,
+            })),
+        }); 
+        //if questions exist in the database throw error
+        if (checkquestions.length > 0) {
+            throw new HttpException('Questions already exist', HttpStatus.BAD_REQUEST);
+
+        } else {
         // 6. Use the insert() method to insert the questionsCreated array into the database:
         await this.questionsRepository.insert(questionsCreated);
         return questionsCreated;
+        }
     }
     async createone (question: CreateQuestionDto) {
         const questionCreated = this.questionsRepository.create();
@@ -34,4 +47,12 @@ export class QuestionsService {
         questionCreated.correctAnswer = question.correctAnswer;
         return this.questionsRepository.save(questionCreated);
     }   
+    async findMany (questions: CreateQuestionDto[]) {
+        const questionsFound = await this.questionsRepository.find({
+            where: questions.map((question) => ({
+                question: question.question,
+            })),
+        });
+        return questionsFound;
+    }
 }
