@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CategoriesModule } from './Categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+
 @Module({
   imports: [CategoriesModule,
    TypeOrmModule.forRoot({ 
@@ -18,3 +19,5 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
 })
 export class AppModule {}
+
+ 
