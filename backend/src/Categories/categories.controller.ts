@@ -23,11 +23,50 @@ export class CategoriesController {
 		return this.categoriesService.findOneById(params.id)
 	}
 	//get a categories by name
-	@Get(':name')
-	async findOneByName(@Param() params: { name: string }) {
+	@Get('name/:name')
+	async findOneByName(@Param('name') params: { name: string }) {
 		return this.categoriesService.findOneByName(params.name)
 	}
-
+	//get all questions from a category by name
+	@Get('name/:name/questions')
+	async findQuestionsByCategoryName(@Param('name') name: string) {
+		try {
+			const category = await this.categoriesService.findOneByName(name);
+			return category.questions;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}
+	//get a number of questions from a category by name
+	@Get('name/:name/questions/:number')
+	async findQuestionsByCategoryNameAndNumber(@Param('name') name: string, @Param('number') number: number) {
+		try {
+			const category = await this.categoriesService.findOneByName(name);
+			return category.questions.slice(0, number);
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}
+	//get a number of random questions from a category by name
+	@Get('name/:name/questions/random/:number')
+	async findRandomQuestionsByCategoryNameAndNumber(@Param('name') name: string, @Param('number') number: number) {
+		try {
+			const category = await this.categoriesService.findOneByName(name);
+			const questions = category.questions;
+			const randomQuestions = [];
+			for (let i = 0; i < number; i++) {
+				const randomIndex = Math.floor(Math.random() * questions.length);
+				randomQuestions.push(questions[randomIndex]);
+				questions.splice(randomIndex, 1);
+			}
+			return randomQuestions;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}
 	//get all questions from a category
 	@Get(':id/questions')
 	async findAllQuestions(@Param('id') categoryId: UUID) {
@@ -94,4 +133,18 @@ export class CategoriesController {
 			throw error;
 		}
 	}
+	// add a question to a category by name
+   @Post('name/:name/questions')
+	async addQuestionToCategoryByName(@Param('name') name: string, @Body() question: CreateQuestionDto) {
+		 try {
+			const QuestionCreated = await this.questionsService.createone(question);
+			const category = await this.categoriesService.findOneByName(name);
+			category.questions.push(QuestionCreated);
+			await this.categoriesService.update(category);
+			return QuestionCreated;
+		 } catch (error) {
+			console.error(error);
+			throw error;
+		 }
+		}
 }
