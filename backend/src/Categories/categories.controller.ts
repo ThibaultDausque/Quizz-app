@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateCategoriesDto } from './dto/createCategories.dto';
 import { CategoriesService } from './categories.service';
 import type { UUID } from 'crypto';
@@ -24,15 +24,25 @@ export class CategoriesController {
 	}
 	//get a categories by name
 	@Get('name/:name')
-	async findOneByName(@Param('name') params: { name: string }) {
-		return this.categoriesService.findOneByName(params.name)
+	async findOneByName(@Param('name') name: string) {
+		const category = await this.categoriesService.findOneByName(name);
+		if (!category) {
+			// If category doesn't exist throw an error with status 400
+			throw new HttpException(`Category ${name} doesn't exist`, HttpStatus.BAD_REQUEST);
+		} else {
+			return category;
+		}
 	}
 	//get all questions from a category by name
 	@Get('name/:name/questions')
 	async findQuestionsByCategoryName(@Param('name') name: string) {
 		try {
 			const category = await this.categoriesService.findOneByName(name);
-			return category.questions;
+			if(!category){
+				throw new HttpException(`Category ${name} doesn't exist`, HttpStatus.BAD_REQUEST);
+			} else {
+				return category.questions;
+			}
 		} catch (error) {
 			console.error(error);
 			throw error;
@@ -43,8 +53,11 @@ export class CategoriesController {
 	async findQuestionsByCategoryNameAndNumber(@Param('name') name: string, @Param('number') number: number) {
 		try {
 			const category = await this.categoriesService.findOneByName(name);
+			if(!category){
+				throw new HttpException(`Category ${name} doesn't exist`, HttpStatus.BAD_REQUEST);
+			} else {
 			return category.questions.slice(0, number);
-		} catch (error) {
+		} }catch (error) {
 			console.error(error);
 			throw error;
 		}
@@ -54,6 +67,9 @@ export class CategoriesController {
 	async findRandomQuestionsByCategoryNameAndNumber(@Param('name') name: string, @Param('number') number: number) {
 		try {
 			const category = await this.categoriesService.findOneByName(name);
+			if(!category){
+				throw new HttpException(`Category ${name} doesn't exist`, HttpStatus.BAD_REQUEST);
+			} else {
 			const questions = category.questions;
 			const randomQuestions = [];
 			for (let i = 0; i < number; i++) {
@@ -62,7 +78,7 @@ export class CategoriesController {
 				questions.splice(randomIndex, 1);
 			}
 			return randomQuestions;
-		} catch (error) {
+		}} catch (error) {
 			console.error(error);
 			throw error;
 		}
@@ -111,8 +127,23 @@ export class CategoriesController {
 	@Post()
 	async create(@Body() categories: CreateCategoriesDto) {
 		try {
-			const categoriesCreated = await this.categoriesService.create(categories);
-			return categoriesCreated;
+			// Check if category already exists by his name before creating it
+			const categoriesExist = await this.categoriesService.findOneByName(categories.name);
+			const checkquestionsinDB = await this.questionsService.findMany(categories.questions);
+			// join the questions in the array to a string for display it in the error message
+			const questionTexts = checkquestionsinDB.map(q => q.question).join(', ');
+			if (checkquestionsinDB.length > 0 && categoriesExist) {
+				throw new HttpException('Category ' + categories.name + ' and Questions ' + questionTexts + ' already exist', HttpStatus.BAD_REQUEST);
+			} else if (checkquestionsinDB.length > 0) {
+				// If questions already exists throw an error with status 400
+				throw new HttpException('Questions ' + questionTexts + 'already exist', HttpStatus.BAD_REQUEST);
+			} else if (categoriesExist) {
+				// If category already exists throw an error with status 400
+				throw new HttpException('Category ' + categories.name + ' already exists', HttpStatus.BAD_REQUEST);
+			} else {
+				const categoriesCreated = await this.categoriesService.create(categories);
+				return categoriesCreated;
+			}
 		} catch (error) {
 			console.error(error)
 			throw error;
@@ -134,17 +165,29 @@ export class CategoriesController {
 		}
 	}
 	// add a question to a category by name
-   @Post('name/:name/questions')
+	@Post('name/:name/questions')
 	async addQuestionToCategoryByName(@Param('name') name: string, @Body() question: CreateQuestionDto) {
-		 try {
+		try {
 			const QuestionCreated = await this.questionsService.createone(question);
 			const category = await this.categoriesService.findOneByName(name);
-			category.questions.push(QuestionCreated);
-			await this.categoriesService.update(category);
-			return QuestionCreated;
-		 } catch (error) {
+			if (!category) {
+				// If category doesn't exist throw an error with status 400
+				throw new HttpException('Category ' + name + ' doesn\'t exist', HttpStatus.BAD_REQUEST);
+			} else {
+				// Check if question already exists by his name  in category before adding it 
+				const questionExists = category.questions.find((q) => q.question === QuestionCreated.question);
+				if (questionExists) {
+					// If question already exists in category throw an error with status 400
+					throw new HttpException('Question ' + question.question + ' already exists in this category', HttpStatus.BAD_REQUEST);
+				} else {
+					category.questions.push(QuestionCreated);
+					await this.categoriesService.update(category);
+					return QuestionCreated;
+				}
+			}
+		} catch (error) {
 			console.error(error);
 			throw error;
-		 }
 		}
+	}
 }
