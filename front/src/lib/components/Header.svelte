@@ -1,10 +1,15 @@
 <script lang="ts">
-  import logo from "../lib/img/logo.png";
+  import logo from "$lib/img/logo.png";
 </script>
 
 <div class="header">
   <h1 class="title">QUIZZ APP</h1>
-  <img src={logo} alt="Logo" />
+  <button>
+    <a href="./">
+      <img src={logo} alt="Logo" />
+    </a>
+  </button>
+  
 </div>
 
 <style>
