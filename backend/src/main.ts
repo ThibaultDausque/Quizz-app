@@ -6,7 +6,7 @@ async function bootstrap() {
 
   // Configurer CORS
   app.enableCors({
-    origin: 'http://localhost:8080/', // Remplacez par votre domaine front-end
+    origin: 'http://localhost:8080', // Adresse du front
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
