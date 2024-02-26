@@ -6,7 +6,6 @@
 
   onMount(async () => {
     categories = await load();
-    console.log(categories);
   });
 </script>
 
@@ -23,6 +22,7 @@
         </a>
         <p>Nom: {category.name}</p>
         <p>Description: {category.description}</p>
+        <p>Question : {category.questions}</p>
       </li>
     {/each}
     <button>

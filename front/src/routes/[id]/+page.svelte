@@ -1,6 +1,7 @@
-<!-- src/routes/blog/[slug]/+page.svelte -->
+
 <script>
   export let data;
+  console.log(data);
 </script>
 
 <h1>{data.title}</h1>
