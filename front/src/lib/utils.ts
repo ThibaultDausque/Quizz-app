@@ -14,7 +14,11 @@ export async function load/*fetchQuestions*/() {
 }
 
 export async function loadID(params: { id: any }) {
-  const apiUrl = window ? 'http://localhost:3000/categories' : 'http://back:3000/categories';
+
+  const isBroswer = typeof window !== "undefined";
+
+  const apiUrl = isBroswer ? "http://localhost:3000/" : "http://back:3000/";
+
   console.log(apiUrl);
   try {
     const response = await fetch(`${apiUrl}/${params.id}`);
@@ -33,6 +37,9 @@ export async function loadID(params: { id: any }) {
 
 export async function fetchQuestions(id: any) {
   const apiUrl = window ? 'http://back:3000/categories' : 'http://localhost:3000/categories';
+
+  console.log(apiUrl);
+
 
   try {
       const response = await fetch(`${apiUrl}/${id}`);

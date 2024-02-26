@@ -1,6 +1,11 @@
-<!-- src/routes/blog/[slug]/+page.svelte -->
+
+
 <script>
   export let data;
+  console.log(data);
+
+  export let data;
+
 </script>
 
 <h1>{data.title}</h1>
@@ -14,4 +19,6 @@
   </ul>
 {:else}
   <p>No questions available.</p>
+
 {/if}
+

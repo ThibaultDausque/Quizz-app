@@ -16,6 +16,6 @@ export class Question {
     @Column({ length: 550 })
     correctAnswer: string;
 
-    @ManyToOne(() => Categories, categories => categories.questions)
+    @ManyToOne(() => Categories, (categories) => categories.questions)
     categories: Categories;
 }
