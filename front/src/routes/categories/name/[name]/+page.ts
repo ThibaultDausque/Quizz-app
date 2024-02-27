@@ -2,15 +2,12 @@ import type { Load } from '@sveltejs/kit';
 
 export const load: Load = async ({ params, fetch }) => {
     try {
-
-
         const response = await fetch(`http://localhost:3000/categories/name/${params.name}/questions`);
         console.log("Value of params.slug:", params.name);
         // Vérifier si la réponse est ok
         if (!response.ok) {
             throw new Error("Failed to fetch data");
         }
-
         // Convertir la réponse en JSON
         const data = await response.json();
         console.log("Data:", data);
