@@ -1,9 +1,9 @@
 <script lang="ts">
     
-    let category = {
+    export let category = {
         name: "",
         description: "",
-        questions: [{ question: "", correctAnswer: "" }],
+        questions: [{ question: "", choices: ["", "", "", ""], correctAnswer: "" }],
     };
 
     const postForm = () => {
@@ -33,17 +33,16 @@
 
         <label>
             Description de la catégorie:
-            <textarea bind:value={category.description} name="description"
-            ></textarea>
+            <textarea bind:value={category.description} name="description"></textarea>
         </label>
 
-        {#each category.questions as { question, correctAnswer }, index}
+        {#each category.questions as { question, choices, correctAnswer }, index}
             <div>
                 <label>
                     Question {index + 1}:
                     <input
                         bind:value={question}
-                        name={`question${index + 1}`}
+                        name={`${index + 1}`}
                     />
                 </label>
 
@@ -51,7 +50,27 @@
                     Réponse correcte {index + 1}:
                     <input
                         bind:value={correctAnswer}
-                        name={`answer${index + 1}`}
+                        name={`${index + 1}`}
+                    />
+                    choix de reponse {index + 1}:
+                    <input
+                        bind:value={choices[0]}
+                        name={`${index + 1}`}
+                    />
+                    choix de reponse {index + 2}:
+                    <input
+                        bind:value={choices[1]}
+                        name={`${index + 1}`}
+                    />
+                    choix de reponse {index + 3}:
+                    <input
+                        bind:value={choices[2]}
+                        name={`${index + 1}`}
+                    />
+                    choix de reponse {index + 4}:
+                    <input
+                        bind:value={choices[3]}
+                        name={`${index + 1}`}
                     />
                 </label>
             </div>

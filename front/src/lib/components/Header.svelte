@@ -5,7 +5,7 @@
 <div class="header">
   <h1 class="title">QUIZZ APP</h1>
   <button>
-    <a href="./">
+    <a href="../../">
       <img src={logo} alt="Logo" />
     </a>
   </button>
