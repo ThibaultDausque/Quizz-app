@@ -26,6 +26,7 @@ export async function load/*fetchQuestions*/() {
 }
 
 export async function loadID(params: { id: any }) {
+
   const isBroswer = typeof window !== "undefined";
 
   const apiUrl = isBroswer ? "http://localhost:3000/" : "http://back:3000/";
@@ -46,17 +47,22 @@ export async function loadID(params: { id: any }) {
     const questions: Question[] = await response.json();
     console.log('Fetched questions:', questions);
     return questions;
+
+    const questions = await response.json();
+    return { questions };
+
   } catch (error) {
     console.error('Error fetching questions:', error);
     throw error;
   }
 }
 
-export async function fetchQuestions(id: any) {
+
   const isBroswer = typeof window !== "undefined";
 
   const apiUrl = isBroswer ? "http://localhost:3000/" : "http://back:3000/";
   console.log(apiUrl);
+
   try {
       const response = await fetch(`${apiUrl}/${id}`);
 
