@@ -3,15 +3,27 @@
 
   /**
      
-      * @type {{ questions: { name: string; id: string; correctAnswer: string; }[]; }}
+      * @type { questions: any }
       */
-  export let data;
+  export let data: string;
   console.log(data);
-</script>
 
+  import { choicesData } from "$lib/components/Store";
+  let choices: string;
+  choicesData.subscribe(value => { choices = value; });
+</script>
 {#if data.post && data.post.length > 0}
-  <h1>{data.post[0].question}</h1> 
-  <h1>{data.post[0].correctAnswer}</h1>
+  {#each data.post as question }
+    <div>
+      <h1>{question.question}</h1>
+      <h2>{question.correctAnswer}</h2>
+    </div>
+  {/each}
+  {#if choices && choices.length > 0}
+        {#each choices as choice, index}
+          <p>Choix {index + 1}: {choice}</p>
+        {/each}
+    {/if}
 {:else}
   <p>No data available.</p>
 {/if}
