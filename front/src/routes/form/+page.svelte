@@ -1,9 +1,11 @@
 <script lang="ts">
-    
+    import { choicesData } from "$lib/components/Store";
     export let category = {
         name: "",
         description: "",
-        questions: [{ question: "", choices: ["", "", "", ""], correctAnswer: "" }],
+        questions: [
+            { question: "", choices: ["", "", "", ""], correctAnswer: "" },
+        ],
     };
 
     const postForm = () => {
@@ -21,6 +23,8 @@
             .catch((error) => {
                 console.error("Erreur lors de la requête POST:", error);
             });
+            const choices = category.questions.map(q => q.choices);
+            choicesData.set(choices.flat());
     };
 </script>
 
@@ -33,45 +37,28 @@
 
         <label>
             Description de la catégorie:
-            <textarea bind:value={category.description} name="description"></textarea>
+            <textarea bind:value={category.description} name="description"
+            ></textarea>
         </label>
 
         {#each category.questions as { question, choices, correctAnswer }, index}
             <div>
                 <label>
                     Question {index + 1}:
-                    <input
-                        bind:value={question}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={question} name={`${index + 1}`} />
                 </label>
 
                 <label>
                     Réponse correcte {index + 1}:
-                    <input
-                        bind:value={correctAnswer}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={correctAnswer} name={`${index + 1}`} />
                     choix de reponse {index + 1}:
-                    <input
-                        bind:value={choices[0]}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={choices[0]} name={`${index + 1}`} />
                     choix de reponse {index + 2}:
-                    <input
-                        bind:value={choices[1]}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={choices[1]} name={`${index + 1}`} />
                     choix de reponse {index + 3}:
-                    <input
-                        bind:value={choices[2]}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={choices[2]} name={`${index + 1}`} />
                     choix de reponse {index + 4}:
-                    <input
-                        bind:value={choices[3]}
-                        name={`${index + 1}`}
-                    />
+                    <input bind:value={choices[3]} name={`${index + 1}`} />
                 </label>
             </div>
         {/each}
