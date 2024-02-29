@@ -7,9 +7,7 @@
     <Header />
 </header>
 
-<main>
-    <slot />
-</main>
+<slot />
 
 <footer>
     <Footer />
@@ -18,12 +16,6 @@
 <style>
     header {
         display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    main {
-        display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
     }

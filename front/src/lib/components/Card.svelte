@@ -1,11 +1,15 @@
 <script lang="ts">
-  export let quiz: { question: string; choices: string[]; correctAnswer: string };
-  export let questionNum: string;
+  //export let quiz: { question: string; choices: string[]; correctAnswer: string } = { question: '', choices: [], correctAnswer: '' };
+  //export let questionNum: string = '';
+  export let questions: any = {};
+
+ 
 </script>
 
 <div class="card">
-  <p>{questionNum}</p>
-  <p>{quiz.question}</p>
+  <h1>{questions.question}</h1>
+  <h2>{questions.correctAnswer}</h2>
+  
   <slot />
 </div>
 
@@ -16,6 +20,8 @@
     align-items: center;
     flex-direction: column;
     margin-top: 15vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
     width: 800px;
     height: 450px;
     padding: 20px;
@@ -25,10 +31,4 @@
     box-shadow: rgba(0, 0, 0, 0.2);
   }
 
-  p {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #4a0857;
-  }
 </style>
