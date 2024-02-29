@@ -8,9 +8,17 @@
 
   export let data: string;
   console.log(data);
-  import Card from "$lib/components/Card.svelte";
   import RecoveryData from "$lib/components/RecoveryData.svelte";
 </script>
-
-<RecoveryData {data} />
-<Card {data} />
+<main>
+  <RecoveryData {data} />
+</main>
+<style>
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
