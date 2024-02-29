@@ -1,5 +1,4 @@
 <script lang="ts">
-
   //export let quiz: { question: string; choices: string[]; correctAnswer: string } = { question: '', choices: [], correctAnswer: '' };
   //export let questionNum: string = '';
   export let questions: any = {};
