@@ -9,6 +9,8 @@
 <div class="card">
   <h1>{questions.question}</h1>
   <h2>{questions.correctAnswer}</h2>
+  
+  <slot />
 </div>
 
 <style>

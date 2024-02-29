@@ -14,6 +14,9 @@
 <header>
   {#if categories.length === 0}
     <p>pas de quizz disponible</p>
+    <a href="./form">
+      <h1>proposer un quiz ?</h1>
+    </a>
   {:else}
     
     <a href="./form">
