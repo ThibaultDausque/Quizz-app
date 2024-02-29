@@ -1,4 +1,14 @@
 <script lang="ts">
+  // @ts-nocheck
+
+  /**
+     
+      * @type { questions: any }
+      */
+
+      export let data: any;
+  console.log(data);
+  
   import { onMount } from "svelte";
   import { load } from "../utils";
   import Timer from "./Timer.svelte";
@@ -15,9 +25,11 @@
   let answerIsCorrect: boolean = false;
   let displayAddPoint: boolean = false;
   let isProcessing: boolean = false;
+  let question: any = {};
 
   onMount(async () => {
     quiz = await load();
+    console.log(quiz);
     totalQuestions.set(quiz.length);
   });
 
@@ -49,24 +61,24 @@
     answerIsCorrect = false;
     displayAddPoint = false;
   }
-
 </script>
 
 {#if quiz.length > 0 && indexQuestion < quiz.length}
   <Card
     quiz={quiz[indexQuestion]}
     questionNum={`Question ${indexQuestion + 1} / ${quiz.length}`}
+  
   >
     <div class="status">
       <Timer onTimeout={nextQuestion} bind:resetTimer />
       <Score />
     </div>
     <div class="question">
-      <Question
+       <Question
         quiz={quiz[indexQuestion]}
         onSelect={validAnswer}
         isIncorrect={incorrectChoice}
-      />
+      />  
       {#if answerIsCorrect}
         <AddPoint value="+1" bgColor={{style: "background-color: green;"}}/>
       {:else if incorrectChoice}

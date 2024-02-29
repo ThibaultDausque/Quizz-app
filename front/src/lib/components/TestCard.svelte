@@ -1,16 +1,22 @@
 <script lang="ts">
-  export let quiz: { question: string; choices: string[]; correctAnswer: string };
-  export let questionNum: string;
+  
+  import ButtonChoice from "./TestButtonChoice.svelte";
   export let questions: any = {};
+  export let choices:any = [];
+  import Button from "./Button.svelte";
+
 </script>
 
 <div class="card">
 
   <h1>{questions.question}</h1>
   <h2>{questions.correctAnswer}</h2>
-
-  <!-- <p>{questionNum}</p> -->
-  <!-- <p>{quiz.question}</p> -->
+  {#if choices && choices.length > 0}
+    {#each choices as choice, index}
+      <p>Choix {index + 1}: {choice}</p>
+    {/each}
+  {/if}
+ 
   <slot />
 </div>
 
