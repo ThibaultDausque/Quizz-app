@@ -5,25 +5,12 @@
      
       * @type { questions: any }
       */
+
   export let data: string;
   console.log(data);
-
-  import { choicesData } from "$lib/components/Store";
-  let choices: string;
-  choicesData.subscribe(value => { choices = value; });
+  import Card from "$lib/components/Card.svelte";
+  import RecoveryData from "$lib/components/RecoveryData.svelte";
 </script>
-{#if data.post && data.post.length > 0}
-  {#each data.post as question }
-    <div>
-      <h1>{question.question}</h1>
-      <h2>{question.correctAnswer}</h2>
-    </div>
-  {/each}
-  {#if choices && choices.length > 0}
-        {#each choices as choice, index}
-          <p>Choix {index + 1}: {choice}</p>
-        {/each}
-    {/if}
-{:else}
-  <p>No data available.</p>
-{/if}
+
+<RecoveryData {data} />
+<Card {data} />
