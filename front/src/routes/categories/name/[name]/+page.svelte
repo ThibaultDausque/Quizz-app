@@ -1,18 +1,17 @@
 <script lang="ts">
   // @ts-nocheck
-
   /**
      
       * @type { questions: any }
       */
   export let data: string;
   console.log(data);
-<<<<<<< HEAD
-
+  import RecoveryData from "$lib/components/RecoveryData.svelte";
   import { choicesData } from "$lib/components/Store";
   let choices: string;
   choicesData.subscribe(value => { choices = value; });
 </script>
+
 {#if data.post && data.post.length > 0}
   {#each data.post as question }
     <div>
@@ -28,12 +27,11 @@
 {:else}
   <p>No data available.</p>
 {/if}
-=======
-  import RecoveryData from "$lib/components/RecoveryData.svelte";
-</script>
+
 <main>
   <RecoveryData {data} />
 </main>
+
 <style>
   main {
     display: flex;
@@ -43,4 +41,6 @@
     align-items: center;
   }
 </style>
->>>>>>> e94bcc9 (wip)
+
+
+

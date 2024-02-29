@@ -1,15 +1,23 @@
 <script lang="ts">
-
-  //export let quiz: { question: string; choices: string[]; correctAnswer: string } = { question: '', choices: [], correctAnswer: '' };
-  //export let questionNum: string = '';
+  
+  import ButtonChoice from "./TestButtonChoice.svelte";
   export let questions: any = {};
+  export let choices:any = [];
+  import Button from "./Button.svelte";
 
- 
 </script>
 
 <div class="card">
+
   <h1>{questions.question}</h1>
   <h2>{questions.correctAnswer}</h2>
+  {#if choices && choices.length > 0}
+    {#each choices as choice, index}
+      <p>Choix {index + 1}: {choice}</p>
+    {/each}
+  {/if}
+ 
+  <slot />
 </div>
 
 <style>
@@ -19,8 +27,6 @@
     align-items: center;
     flex-direction: column;
     margin-top: 15vh;
-    margin-left: 3vh;
-    margin-right: 3vh;
     width: 800px;
     height: 450px;
     padding: 20px;
@@ -30,4 +36,10 @@
     box-shadow: rgba(0, 0, 0, 0.2);
   }
 
+  p {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #4a0857;
+  }
 </style>

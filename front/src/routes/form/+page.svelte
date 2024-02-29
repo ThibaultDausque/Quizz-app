@@ -23,9 +23,15 @@
             .catch((error) => {
                 console.error("Erreur lors de la requête POST:", error);
             });
-            const choices = category.questions.map(q => q.choices);
-            choicesData.set(choices.flat());
+        const choices = category.questions.map((q) => q.choices);
+        choicesData.set(choices.flat());
     };
+
+    const addQuestion = () => {
+        category.questions.push({ question: "", choices: ["", "", "", ""], correctAnswer: "" });
+        category.questions = [...category.questions];
+    };
+
 </script>
 
 <main>
@@ -40,7 +46,8 @@
             <textarea bind:value={category.description} name="description"
             ></textarea>
         </label>
-
+        <button type="button" on:click={addQuestion}>Ajouter une questions ?</button>
+        
         {#each category.questions as { question, choices, correctAnswer }, index}
             <div>
                 <label>
@@ -51,6 +58,7 @@
                 <label>
                     Réponse correcte {index + 1}:
                     <input bind:value={correctAnswer} name={`${index + 1}`} />
+
                     choix de reponse {index + 1}:
                     <input bind:value={choices[0]} name={`${index + 1}`} />
                     choix de reponse {index + 2}:
@@ -62,7 +70,6 @@
                 </label>
             </div>
         {/each}
-
         <button type="submit">Envoyer</button>
     </form>
 </main>
