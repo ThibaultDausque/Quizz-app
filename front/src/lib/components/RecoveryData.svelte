@@ -37,30 +37,37 @@
 </script>
 
 {#if data.post && data.post.length > 0}
-  {#each data.post as questions}
-    <Card {questions}>
+<div class="card">
+  {#if indexQuestion < data.post.length}
+
+    <!--  {#each data.post as questions} -->
+      <h1>{data.post[indexQuestion].question}</h1>
       <div class="status">
         <Timer onTimeout={nextQuestion} bind:resetTimer />
         <Score />
       </div>
       {#if choices && choices.length > 0}
-        {#each choices as choice}
-           <Button text={choice} />
-        {/each}
+      {#each choices.slice(0, 4) as choice, index}
+      <Button text={choice} key={index} />
+      {/each}
       {/if}
       {#if answerIsCorrect}
-        <AddPoint value="+1" bgColor={{ style: "background-color: green;" }} />
+      <AddPoint value="+1" bgColor={{ style: "background-color: green;" }} />
       {:else if incorrectChoice}
-        <AddPoint value="-1" bgColor={{ style: "background-color: red;" }} />
+      <AddPoint value="-1" bgColor={{ style: "background-color: red;" }} />
+      
       {/if}
-    </Card>
-  {/each}
+      
+      <!-- {/each} -->
+      {:else}
+      <div class="result">
+        <h2>Quiz terminé !</h2>
+        <p class="displayScore"><Score /></p>
+      </div>
+      {/if}
+    </div>
 {:else}
-
-<div class="result">
-  <h2>Quiz terminé !</h2>
-  <p class="displayScore"><Score /></p>
-</div>
+  <p>Aucune question trouvée.</p>
 {/if}
 
 <style>
@@ -68,5 +75,20 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .card {
+    animation: fadeInOut 2s ease-in-out;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15vh;
+    /* width: 800px;
+    height: 450px; */
+    padding: 20px;
+    box-shadow: 0ch 0ch 10ch 0ch rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    background-color: #f3bc7e;
+    box-shadow: rgba(0, 0, 0, 0.2);
   }
 </style>
