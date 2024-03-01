@@ -1,5 +1,8 @@
 <script lang="ts">
     import { choicesData } from "$lib/components/Store";
+    import PopupForm from "$lib/components/PopupForm.svelte";
+    let showPopup: boolean = false;
+
     export let category = {
         name: "",
         description: "",
@@ -19,6 +22,7 @@
             .then((response) => response.json())
             .then((data) => {
                 console.log("Réponse du backend:", data);
+                showPopup = true;
             })
             .catch((error) => {
                 console.error("Erreur lors de la requête POST:", error);
@@ -28,11 +32,16 @@
     };
 
     const addQuestion = () => {
-        category.questions.push({ question: "", choices: ["", "", "", ""], correctAnswer: "" });
+        category.questions.push({
+            question: "",
+            choices: ["", "", "", ""],
+            correctAnswer: "",
+        });
         category.questions = [...category.questions];
     };
-
 </script>
+
+<PopupForm show={showPopup} message="Un nouveau quiz a été créé!" />
 
 <main>
     <form on:submit|preventDefault={postForm}>
@@ -46,8 +55,10 @@
             <textarea bind:value={category.description} name="description"
             ></textarea>
         </label>
-        <button type="button" on:click={addQuestion}>Ajouter une questions ?</button>
-        
+        <button type="button" on:click={addQuestion}
+            >Ajouter une questions ?</button
+        >
+
         {#each category.questions as { question, choices, correctAnswer }, index}
             <div>
                 <label>

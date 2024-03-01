@@ -2,9 +2,10 @@
   import { onMount } from "svelte";
   import { load } from "$lib/utils";
   import CardHome from "$lib/components/CardHome.svelte";
-  import Button from "$lib/components/Button.svelte";
+
   let category: any = {};
   let categories: string | any[] = [];
+ 
 
   onMount(async () => {
     categories = await load();
@@ -52,7 +53,7 @@
     margin-left: 3vh;
   }
   h1 {
-    font-size: 50px;
+    font-size: 30px;
     background-color: #9c11b8;
     color: white;
     padding: 20px 40px 20px 40px;
