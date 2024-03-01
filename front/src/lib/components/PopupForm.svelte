@@ -7,7 +7,7 @@
     <div class="popup">
         <div class="popup-content">
             <h2>{message}</h2>
-            <button on:click={() => (show = false)}>Fermer</button>
+            <button class="button" on:click={() => (show = false)}>Fermer</button>
         </div>
     </div>
 {/if}
@@ -30,7 +30,7 @@
         border: 1px solid #888;
         width: 80%;
     }
-    button {
+    .button {
         margin-top: 20px;
         font-size: 20px;
         padding: 10px 20px;
